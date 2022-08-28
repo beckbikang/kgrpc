@@ -11,22 +11,17 @@ message Ad {
   string description = 3;
   float price = 4;
 }
-message AdId {
-  int32 id = 1;
+message AdList {
+  string createAt = 1;
+  string traceId = 2;
+  repeated Ad ads = 3;
 }
 
-message AdList {
-  string traceId = 1;
-  repeated Ad ads = 2;
-}
 message AdIdList{
   repeated int32 id =1;
 }
 
 service AdStream {
-  //一元
-  rpc addAd(Ad) returns (AdId);
-  rpc getAd(AdId) returns (Ad);
   //stream
   rpc addAdList(stream AdList) returns(AdIdList);
   rpc getAdList(AdIdList) returns(stream AdList);
