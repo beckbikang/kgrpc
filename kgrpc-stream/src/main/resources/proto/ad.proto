@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option java_package = "cn.beckbi.pb";
+option java_outer_classname = "AdInfo";
+
+
+
+message Ad {
+  int32 id = 1;
+  string name = 2;
+  string description = 3;
+  float price = 4;
+}
+message AdId {
+  int32 id = 1;
+}
+
+message AdList {
+  string traceId = 1;
+  repeated Ad ads = 2;
+}
+message AdIdList{
+  repeated int32 id =1;
+}
+
+service AdStream {
+  //一元
+  rpc addAd(Ad) returns (AdId);
+  rpc getAd(AdId) returns (Ad);
+  //stream
+  rpc addAdList(stream AdList) returns(AdIdList);
+  rpc getAdList(AdIdList) returns(stream AdList);
+
+}
