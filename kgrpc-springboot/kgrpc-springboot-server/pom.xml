@@ -12,15 +12,7 @@
     <artifactId>kgrpc-springboot-server</artifactId>
 
 
-    <dependencies>
-        <!-- https://mvnrepository.com/artifact/net.devh/grpc-server-spring-boot-starter -->
-        <dependency>
-            <groupId>net.devh</groupId>
-            <artifactId>grpc-server-spring-boot-starter</artifactId>
-            <version>${grpc-springboot}</version>
-        </dependency>
 
-    </dependencies>
 
 
 
