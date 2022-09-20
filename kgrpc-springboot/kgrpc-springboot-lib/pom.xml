@@ -3,14 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>kgrpc</artifactId>
+        <artifactId>kgrpc-springboot</artifactId>
         <groupId>cn.beckbi</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>kgrpc-start</artifactId>
-
+    <artifactId>kgrpc-springboot-lib</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <properties>
         <java.version>1.8</java.version>
@@ -27,7 +27,6 @@
         <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
 
     </properties>
-
 
     <dependencyManagement>
         <dependencies>
@@ -99,6 +98,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

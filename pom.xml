@@ -10,5 +10,6 @@
     <modules>
         <module>kgrpc-start</module>
         <module>kgrpc-stream</module>
+        <module>kgrpc-springboot</module>
     </modules>
 </project>
