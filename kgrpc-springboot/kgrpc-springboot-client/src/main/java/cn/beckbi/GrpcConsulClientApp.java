@@ -8,13 +8,12 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @program: kgrpc
  * @description:
  * @author: bikang
- * @create: 2022-09-20 22:33
+ * @create: 2022-09-20 23:11
  */
-@SpringBootApplication(scanBasePackages ={"cn.beckbi"})
+@SpringBootApplication
 @EnableDiscoveryClient
-public class GrpcServerApp
-{
+public class GrpcConsulClientApp {
     public static void main(String[] args) {
-        SpringApplication.run(GrpcServerApp.class, args);
+        SpringApplication.run(GrpcConsulClientApp.class, args);
     }
 }
