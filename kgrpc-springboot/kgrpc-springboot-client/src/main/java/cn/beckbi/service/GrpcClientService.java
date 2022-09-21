@@ -26,8 +26,8 @@ public class GrpcClientService {
     public AdInfo.Ad  createAd(String name) {
         AdRpcGrpc.AdRpcBlockingStub stub = AdRpcGrpc.newBlockingStub(serverChannel);
         AdInfo.AdId adId = stub.addAd(AdInfo.Ad.newBuilder()
-                .setName("cpl1")
-                .setDescription(name)
+                .setName(name)
+                .setDescription("ad description")
                 .setPrice(31.21f)
                 .build());
         log.info("set ad "+ adId.getId()+" add success !");
