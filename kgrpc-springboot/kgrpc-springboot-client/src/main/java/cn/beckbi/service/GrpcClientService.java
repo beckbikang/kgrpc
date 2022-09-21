@@ -1,5 +1,6 @@
 package cn.beckbi.service;
 
+import cn.beckbi.constants.ServerSupplier;
 import cn.beckbi.pb.AdInfo;
 import cn.beckbi.pb.AdRpcGrpc;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,7 @@ import io.grpc.Channel;
 @Service
 public class GrpcClientService {
 
-    @GrpcClient("kgrpc-server-producer")
+    @GrpcClient(ServerSupplier.PRODUCER_NAME)
     private Channel serverChannel;
 
     public AdInfo.Ad  createAd(String name) {
