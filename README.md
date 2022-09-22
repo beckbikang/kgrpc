@@ -16,6 +16,30 @@
 
 # build springboot Microservice use consul
 
+
+```proto
+syntax = "proto3";
+
+option java_package = "cn.beckbi.pb";
+option java_outer_classname = "AdInfo";
+
+message Ad {
+  int32 id = 1;
+  string name = 2;
+  string description = 3;
+  float price = 4;
+}
+
+message AdId {
+  int32 id = 1;
+}
+
+service AdRpc {
+  rpc addAd(Ad) returns (AdId);
+  rpc getAd(AdId) returns (Ad);
+}
+```
+
 - start consul 
   - consul agent -dev -ui=true -client 0.0.0.0 &
   - view http://127.0.0.1:8500/ui/dc1/services
