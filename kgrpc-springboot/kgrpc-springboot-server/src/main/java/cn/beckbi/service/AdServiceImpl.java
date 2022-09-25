@@ -4,6 +4,7 @@ import cn.beckbi.pb.AdInfo;
 import cn.beckbi.pb.AdRpcGrpc;
 import io.grpc.Status;
 import io.grpc.StatusException;
+import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
 
 import java.util.HashMap;
@@ -17,10 +18,10 @@ import java.util.logging.Logger;
  * @author: bikang
  * @create: 2022-09-20 23:02
  */
+@Slf4j
 @GrpcService
 public class AdServiceImpl extends AdRpcGrpc.AdRpcImplBase  {
 
-    private static final Logger logger = Logger.getLogger(AdServiceImpl.class.getName());
 
     private final Random random = new Random();
 
@@ -33,7 +34,7 @@ public class AdServiceImpl extends AdRpcGrpc.AdRpcImplBase  {
 
 
 
-        logger.info("id:"+id);
+        log.info("id:"+id);
 
         request = request.toBuilder().setId(id).build();
         adInfoMap.put(id, request);
@@ -47,7 +48,7 @@ public class AdServiceImpl extends AdRpcGrpc.AdRpcImplBase  {
                       io.grpc.stub.StreamObserver<cn.beckbi.pb.AdInfo.Ad> responseObserver) {
         int id = request.getId();
 
-        logger.info("id:"+id);
+        log.info("id:"+id);
 
         if (adInfoMap.containsKey(id)) {
             responseObserver.onNext((AdInfo.Ad) adInfoMap.get(id));
