@@ -7,6 +7,7 @@ import cn.beckbi.pb.AdInfo;
 import cn.beckbi.pb.AdRpcGrpc;
 import io.grpc.Deadline;
 import io.grpc.Metadata;
+import io.grpc.StatusRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,11 +47,17 @@ public class GrpcClientService {
                 .setPrice(31.21f)
                 .build();
 
-
-        AdInfo.AdId adId = stub
+        AdInfo.AdId adId = null;
+        try{
+            adId = stub
                 .withDeadline(Deadline.after(300, TimeUnit.MILLISECONDS))
                 .withInterceptors(log3Interceptor)
                 .addAd(adInfo);
+
+        } catch (StatusRuntimeException e) {
+            log.info(" Error Received - Error Code : " + e.getStatus().getCode());
+            log.info("Error details -> " + e.getMessage());
+        }
 
         log.info("set ad "+ adId.getId()+" add success !");
         AdInfo.Ad  result = AdInfo.Ad.newBuilder()
@@ -65,10 +72,17 @@ public class GrpcClientService {
     public synchronized AdInfo.Ad getById(int id) {
         AdRpcGrpc.AdRpcBlockingStub stub = AdRpcGrpc.newBlockingStub(serverChannel);
         AdInfo.AdId adId = AdInfo.AdId.newBuilder().setId(id).build();
-        AdInfo.Ad ad = stub
-                .withDeadline(Deadline.after(100, TimeUnit.MILLISECONDS))
-                .withInterceptors(log2Interceptor, log3Interceptor)
-                .getAd(adId);
+
+        AdInfo.Ad ad = null;
+        try{
+            ad = stub
+                    .withDeadline(Deadline.after(100, TimeUnit.MILLISECONDS))
+                    .withInterceptors(log2Interceptor, log3Interceptor)
+                    .getAd(adId);
+        } catch (StatusRuntimeException e) {
+            log.info(" Error Received - Error Code : " + e.getStatus().getCode());
+            log.info("Error details -> " + e.getMessage());
+        }
         log.info("Ad: " + ad.toString());
         return ad;
     }

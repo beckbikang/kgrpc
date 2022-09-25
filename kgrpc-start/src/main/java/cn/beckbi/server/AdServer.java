@@ -1,10 +1,14 @@
 package cn.beckbi.server;
 
 
+
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 /**
@@ -21,9 +25,16 @@ public class AdServer {
 
     private void start() throws IOException {
 
+        String rootDir = Objects.requireNonNull(AdServer.class.getClassLoader().getResource("")).getPath();
+
+
+        File keyFile = Paths.get( rootDir+"/server.pem").toFile();
+        File certFile = Paths.get( rootDir+"/server.crt")
+                .toFile();
         int port = 11111;
         server = ServerBuilder.forPort(port)
                 .addService(new AdRpcImpl())
+                .useTransportSecurity(certFile, keyFile)
                 .build()
                 .start();
         logger.info("Server started, listening on " + port);
