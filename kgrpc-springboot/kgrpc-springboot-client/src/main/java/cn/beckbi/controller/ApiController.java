@@ -6,10 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @program: kgrpc
@@ -43,7 +40,6 @@ public class ApiController {
 
 
         AdInfo.Ad adInfo = grpcClientService.createAd(name);
-
         return AdX.builder()
                 .id(adInfo.getId())
                 .name(adInfo.getName())
@@ -51,5 +47,18 @@ public class ApiController {
                 .price(adInfo.getPrice())
                 .build();
     }
+
+    @GetMapping("/ad/{id}")
+    public AdX createAd(@PathVariable("id") Integer id) {
+
+        AdInfo.Ad adInfo = grpcClientService.getById(id);
+        return AdX.builder()
+                .id(adInfo.getId())
+                .name(adInfo.getName())
+                .desc(adInfo.getDescription())
+                .price(adInfo.getPrice())
+                .build();
+    }
+
 
 }
