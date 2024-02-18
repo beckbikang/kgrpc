@@ -50,7 +50,7 @@ public class GrpcClientService {
         AdInfo.AdId adId = null;
         try{
             adId = stub
-                .withDeadline(Deadline.after(300, TimeUnit.MILLISECONDS))
+                .withDeadline(Deadline.after(2000, TimeUnit.MILLISECONDS))
                 .withInterceptors(log3Interceptor)
                 .addAd(adInfo);
 

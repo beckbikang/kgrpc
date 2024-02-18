@@ -38,7 +38,8 @@ public class AdServiceImpl extends AdRpcGrpc.AdRpcImplBase  {
 
         request = request.toBuilder().setId(id).build();
         adInfoMap.put(id, request);
-        AdInfo.AdId adId = AdInfo.AdId.newBuilder().setId(id).build();
+        AdInfo.AdId adId = AdInfo.AdId.newBuilder()
+            .setId(id).build();
         responseObserver.onNext(adId);
         responseObserver.onCompleted();
     }
